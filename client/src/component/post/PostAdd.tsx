@@ -12,6 +12,7 @@ import * as yup from "yup";
 import { useNavigate, useParams } from "react-router";
 import type { IPost } from "../../interfaces/postInterface";
 import axios from "axios";
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 // yup schema
 const schema = yup.object().shape({
@@ -54,10 +55,7 @@ const PostAdd: React.FC = () => {
         createdAt: new Date(),
         tags: data.tags,
       };
-      const response = await axios.post(
-        "http://localhost:5000/api/posts",
-        send_data,
-      );
+      const response = await axios.post(BACKEND_URL + "api/posts", send_data);
 
       if (response?.status === 201) {
         setMsg(response.data.message);

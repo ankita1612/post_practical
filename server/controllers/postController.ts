@@ -16,7 +16,7 @@ class PostController {
             createdAt : Date.now()     
         });
 
-      res.status(201).json({"success":true,"message":"post created successfully","data":post});
+      res.status(201).json({"success":true,"message":"Post created successfully","data":post});
     } catch (error) {
       next(error);
     }
@@ -43,7 +43,7 @@ class PostController {
       if (!post) {
         res.status(404).json({ message: 'Post not found' });
       }
-      res.status(201).json({"success":true,"message":"post delete successfully","data":[]});
+      res.status(201).json({"success":true,"message":"Post deleted successfully","data":[]});
     } catch (error) {
       next(error);
     }

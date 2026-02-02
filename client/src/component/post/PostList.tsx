@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import type { IPost } from "../../interfaces/postInterface";
 import PostRow from "./PostRow";
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 function PostList() {
   const [postData, usePostData] = useState<IPost[]>([]);
   const [msg, setMsg] = useState("");
@@ -12,7 +14,7 @@ function PostList() {
 
   const fetch = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/posts");
+      const response = await axios.get(BACKEND_URL + "api/posts");
       if (response.status === 201) {
         usePostData(response.data.data);
         console.log(response.data.data);
@@ -30,9 +32,7 @@ function PostList() {
   const handleDelete = async (id: string) => {
     if (!window.confirm("sure to delete?")) return;
     try {
-      const response = await axios.delete(
-        "http://localhost:5000/api/posts/" + id,
-      );
+      const response = await axios.delete(BACKEND_URL + "api/posts/" + id);
       fetch();
       setMsg(response?.data?.message);
       setMsgType("success");
